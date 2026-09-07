@@ -1,0 +1,1346 @@
+{
+    "info": {
+        "_postman_id": "laptop-store-32-testcases-2026",
+        "name": "Laptop Store - 32 Test Cases (Full GET, POST, PUT, DELETE)",
+        "description": "Bộ sưu tập 32 ca kiểm thử tự động toàn diện cho Website Laptop Store trên Laravel 12. Bao gồm các kịch bản chức năng, bảo mật và bắt lỗi.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://127.0.0.1:8000",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "1. Module Trang chủ & Sản phẩm (GET)",
+            "item": [
+                {
+                    "name": "TC_01 - [GET] Truy cập trang chủ Laptop Store",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": []
+                        },
+                        "description": "Kiểm tra tải trang chủ hệ thống bán máy tính."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                                    "pm.test(\"Response time is under 1500ms\", function () { pm.expect(pm.response.responseTime).to.be.below(1500); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_02 - [GET] Xem chi tiết laptop Asus TUF Gaming hợp lệ",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/san-pham/laptop-asus-tuf-gaming-f166-fx607vj-rl034wi-9",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "san-pham",
+                                "laptop-asus-tuf-gaming-f166-fx607vj-rl034wi-9"
+                            ]
+                        },
+                        "description": "Lấy chi tiết cấu hình và hình ảnh laptop có trong cơ sở dữ liệu."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                                    "pm.test(\"Response contains product detail\", function () { pm.expect(pm.response.text()).to.include(\"Asus TUF\"); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_03 - [GET] Xem chi tiết laptop với slug không tồn tại",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/san-pham/laptop-khong-ton-tai-404",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "san-pham",
+                                "laptop-khong-ton-tai-404"
+                            ]
+                        },
+                        "description": "Kiểm tra xử lý ngoại lệ khi truy vấn sản phẩm không tồn tại trong hệ thống."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 404 Not Found\", function () { pm.response.to.have.status(404); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_04 - [GET] Xem danh mục sản phẩm Laptop Gaming",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/danh-muc/laptop-gaming",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "danh-muc",
+                                "laptop-gaming"
+                            ]
+                        },
+                        "description": "Lấy danh sách các máy tính thuộc danh mục Laptop Gaming."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_05 - [GET] Xem trang so sánh cấu hình laptop",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/so-sanh",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "so-sanh"
+                            ]
+                        },
+                        "description": "Tải giao diện so sánh thông số kỹ thuật 2 hoặc nhiều dòng máy tính."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_06 - [GET] Kiểm tra tình trạng máy chủ (Health Check)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/up",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "up"
+                            ]
+                        },
+                        "description": "Health check kiểm tra server Laravel backend đang hoạt động ổn định."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200 OK\", function () { pm.response.to.have.status(200); });",
+                                    "pm.test(\"Server is UP\", function () { pm.expect(pm.response.text()).to.include(\"Application up\"); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_07 - [GET] Truy cập trang đăng nhập người dùng",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/dang-nhap",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dang-nhap"
+                            ]
+                        },
+                        "description": "Tải trang biểu mẫu đăng nhập khách hàng."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_08 - [GET] Truy cập trang đăng ký tài khoản",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/dang-ky",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "dang-ky"
+                            ]
+                        },
+                        "description": "Tải trang đăng ký tài khoản TFmember mới."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "2. Module Xác thực & Tài khoản (POST)",
+            "item": [
+                {
+                    "name": "TC_09 - [POST] Kiểm tra SĐT hợp lệ chưa từng đăng ký",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/check-phone",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "check-phone"
+                            ]
+                        },
+                        "description": "Kiểm tra tính khả dụng của số điện thoại mới.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"phone\": \"0912345678\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                                    "var jsonData = pm.response.json(); pm.test(\"SĐT có thể sử dụng (exists = false)\", function () { pm.expect(jsonData.exists).to.eql(false); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_10 - [POST] Kiểm tra SĐT đã tồn tại trong hệ thống",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/check-phone",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "check-phone"
+                            ]
+                        },
+                        "description": "Kiểm tra SĐT trùng lặp với tài khoản đã có.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"phone\": \"0987654321\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                                    "var jsonData = pm.response.json(); pm.test(\"SĐT đã tồn tại (exists = true)\", function () { pm.expect(jsonData.exists).to.eql(true); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_11 - [POST] Kiểm tra SĐT rỗng (Validation)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/check-phone",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "check-phone"
+                            ]
+                        },
+                        "description": "Gửi request kiểm tra SĐT không truyền tham số.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"phone\": \"\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_12 - [POST] Kiểm tra SĐT chứa ký tự đặc biệt",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/check-phone",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "check-phone"
+                            ]
+                        },
+                        "description": "Kiểm tra tính an toàn trước dữ liệu không hợp lệ.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"phone\": \"0987abc$$$\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_13 - [POST] Xác thực mã OTP sai",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/verify-otp",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "verify-otp"
+                            ]
+                        },
+                        "description": "Nhập mã xác thực OTP sai hoặc phiên đăng ký đã hết hạn.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"otp\": \"9999\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                                    "var jsonData = pm.response.json(); pm.test(\"Báo lỗi phiên hoặc OTP sai\", function () { pm.expect(jsonData.status).to.eql(\"error\"); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_14 - [POST] Xác thực mã OTP khi để trống",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/verify-otp",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "verify-otp"
+                            ]
+                        },
+                        "description": "Gửi yêu cầu xác thực không truyền mã OTP.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"otp\": \"\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                                    "var jsonData = pm.response.json(); pm.test(\"Status error\", function () { pm.expect(jsonData.status).to.eql(\"error\"); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_15 - [POST] Gửi lại mã OTP khi chưa có phiên đăng ký",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/resend-otp",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "resend-otp"
+                            ]
+                        },
+                        "description": "Yêu cầu gửi lại OTP khi phiên làm việc không hợp lệ."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+                                    "var jsonData = pm.response.json(); pm.test(\"Báo lỗi phiên\", function () { pm.expect(jsonData.status).to.eql(\"error\"); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_16 - [POST] Quên mật khẩu - Gửi mã OTP xác nhận",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/quen-mat-khau",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "quen-mat-khau"
+                            ]
+                        },
+                        "description": "Yêu cầu lấy lại mật khẩu với email chưa từng đăng ký.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"notfound@example.com\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code hợp lệ (Redirect/Error)\", function () { pm.expect([200, 302, 422]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "3. Module Giỏ hàng & Đặt hàng (POST, GET)",
+            "item": [
+                {
+                    "name": "TC_17 - [GET] Xem giỏ hàng khi chưa đăng nhập",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/gio-hang",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "gio-hang"
+                            ]
+                        },
+                        "description": "Kiểm tra bảo mật trang giỏ hàng cá nhân (yêu cầu Auth)."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Redirect to Login (302/401)\", function () { pm.expect([302, 401]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_18 - [POST] Thêm vào giỏ khi CHƯA đăng nhập (Bảo mật 401)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/gio-hang/them",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "gio-hang",
+                                "them"
+                            ]
+                        },
+                        "description": "Kiểm tra phân quyền: Không được thêm vào giỏ khi chưa xác thực.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"product_id\": 9\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status code is 401 Unauthorized\", function () { pm.response.to.have.status(401); });",
+                                    "var jsonData = pm.response.json(); pm.test(\"Báo lỗi yêu cầu đăng nhập\", function () { pm.expect(jsonData.message).to.eql(\"Vui lòng đăng nhập!\"); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_19 - [POST] Thêm sản phẩm không tồn tại vào giỏ (ID: 99999)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/gio-hang/them",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "gio-hang",
+                                "them"
+                            ]
+                        },
+                        "description": "Kiểm tra xử lý khi truyền mã sản phẩm không hợp lệ.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"product_id\": 99999\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Chặn truy cập trái phép hoặc không tìm thấy SP\", function () { pm.expect([401, 404]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_20 - [POST] Cập nhật số lượng giỏ hàng khi chưa đăng nhập",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/gio-hang/cap-nhat",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "gio-hang",
+                                "cap-nhat"
+                            ]
+                        },
+                        "description": "Kiểm tra bảo mật khi gọi API cập nhật số lượng.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"item_id\": 1,\n    \"quantity\": 3\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Kiểm tra phản hồi server\", function () { pm.expect([200, 302, 401]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_21 - [POST] Xóa sản phẩm khỏi giỏ hàng khi chưa đăng nhập",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/gio-hang/xoa",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "gio-hang",
+                                "xoa"
+                            ]
+                        },
+                        "description": "Kiểm tra gọi API xóa món hàng trong giỏ.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"item_id\": 1\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Kiểm tra phản hồi xóa giỏ hàng\", function () { pm.expect([200, 401, 404]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_22 - [POST] Mua ngay sản phẩm khi chưa đăng nhập",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/don-hang/mua-ngay",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "don-hang",
+                                "mua-ngay"
+                            ]
+                        },
+                        "description": "Chức năng Mua ngay chuyển hướng người dùng sang trang thanh toán/đăng nhập.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"id_san_pham\": 9,\n    \"so_luong\": 1\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Redirect sang trang thanh toán hoặc đăng nhập\", function () { pm.expect([302, 401]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "4. Module Đánh giá sản phẩm (POST, DELETE)",
+            "item": [
+                {
+                    "name": "TC_23 - [POST] Gửi đánh giá sản phẩm thiếu số sao rating",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reviews",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reviews"
+                            ]
+                        },
+                        "description": "Kiểm tra ràng buộc dữ liệu đầu vào: rating bắt buộc.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"product_id\": 9,\n    \"rating\": null,\n    \"content\": \"M\\u00e1y r\\u1ea5t \\u0111\\u1eb9p v\\u00e0 m\\u01b0\\u1ee3t m\\u00e0\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Bắt lỗi validation thiếu số sao (302/422)\", function () { pm.expect([302, 422]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_24 - [POST] Gửi đánh giá nội dung quá ngắn (< 3 ký tự)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reviews",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reviews"
+                            ]
+                        },
+                        "description": "Kiểm tra ràng buộc độ dài nội dung tối thiểu 3 ký tự.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"product_id\": 9,\n    \"rating\": 5,\n    \"content\": \"ok\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Bắt lỗi validation min 3 ký tự\", function () { pm.expect([302, 422]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_25 - [DELETE] Xóa đánh giá sản phẩm khi chưa đăng nhập",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reviews/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reviews",
+                                "1"
+                            ]
+                        },
+                        "description": "Kiểm tra bảo mật API xóa đánh giá (phải có quyền sở hữu/đăng nhập)."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Chặn truy cập trái phép 401 Unauthorized\", function () { pm.response.to.have.status(401); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_26 - [DELETE] Xóa đánh giá không tồn tại (ID: 99999)",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/reviews/99999",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "reviews",
+                                "99999"
+                            ]
+                        },
+                        "description": "Kiểm tra xử lý ngoại lệ khi xóa review không tồn tại."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Status 401 hoặc 404\", function () { pm.expect([401, 404]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "5. Module Quản trị Admin (PUT, DELETE, POST)",
+            "item": [
+                {
+                    "name": "TC_27 - [GET] Truy cập trang Admin Dashboard khi chưa xác thực",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/admin",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "admin"
+                            ]
+                        },
+                        "description": "Kiểm tra bảo vệ phân hệ quản trị dành riêng cho Quản trị viên."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Redirect về trang Admin Login (302/401)\", function () { pm.expect([302, 401]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_28 - [PUT] Cập nhật danh mục laptop khi chưa đăng nhập Admin",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/admin/categories/update/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "categories",
+                                "update",
+                                "1"
+                            ]
+                        },
+                        "description": "Kiểm tra bảo mật phương thức PUT cập nhật danh mục.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"ten_danh_muc\": \"Laptop Gaming Cao C\\u1ea5p\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Chặn quyền sửa danh mục 401 Unauthorized\", function () { pm.response.to.have.status(401); });",
+                                    "var jsonData = pm.response.json(); pm.test(\"Thông báo chưa xác thực\", function () { pm.expect(jsonData.message).to.eql(\"Unauthenticated.\"); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_29 - [PUT] Cập nhật thương hiệu laptop khi chưa đăng nhập Admin",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/admin/brands/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "brands",
+                                "1"
+                            ]
+                        },
+                        "description": "Kiểm tra bảo mật phương thức PUT cập nhật thương hiệu.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"ten_thuong_hieu\": \"ASUS ROG Strix\"\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Chặn quyền sửa thương hiệu 401 Unauthorized\", function () { pm.response.to.have.status(401); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_30 - [DELETE] Xóa hình ảnh phụ của sản phẩm trong Admin",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/admin/products/delete-image/99999",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "products",
+                                "delete-image",
+                                "99999"
+                            ]
+                        },
+                        "description": "Kiểm tra phương thức DELETE xóa file ảnh đính kèm sản phẩm."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Chặn quyền xóa ảnh 401 Unauthorized\", function () { pm.response.to.have.status(401); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_31 - [DELETE] Xóa danh mục sản phẩm khi chưa đăng nhập Admin",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/admin/categories/delete/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "categories",
+                                "delete",
+                                "1"
+                            ]
+                        },
+                        "description": "Kiểm tra bảo mật API xóa danh mục."
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Chặn quyền xóa danh mục 401 Unauthorized\", function () { pm.response.to.have.status(401); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "TC_32 - [POST] Bật/tắt trạng thái ẩn hiện sản phẩm (Ajax Admin)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/admin/products/update-status",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "admin",
+                                "products",
+                                "update-status"
+                            ]
+                        },
+                        "description": "Cập nhật nhanh trạng thái kinh doanh của laptop qua cơ chế Ajax.",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"id\": 9,\n    \"trang_thai\": 0\n}"
+                        }
+                    },
+                    "response": [],
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.test(\"Chặn thay đổi trạng thái khi chưa Auth\", function () { pm.expect([401, 302]).to.include(pm.response.code); });"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

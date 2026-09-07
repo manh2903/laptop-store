@@ -1,0 +1,35 @@
+ .login-box { max-width: 450px; margin: 80px auto; background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .alert-error { background: #fff5f5; color: #d70018; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; border: 1px solid #ffdada; display: flex; align-items: center; gap: 8px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { font-size: 13px; font-weight: 600; color: #444; display: block; margin-bottom: 8px; }
+        .form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; box-sizing: border-box; }
+        .form-input:focus { border-color: #d70018; }
+        .forgot-link { display: block; text-align: right; font-size: 12px; color: #2f80ed; text-decoration: none; margin-top: 5px; }
+        .btn-login { width: 100%; padding: 14px; background: #d70018; color: #fff; border: none; border-radius: 8px; font-weight: 700; margin-top: 25px; cursor: pointer; }
+
+        /* --- CODE CŨ CỦA BẠN (GIỮ NGUYÊN) --- */
+.login-box { max-width: 450px; margin: 80px auto; background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.alert-error { background: #fff5f5; color: #d70018; padding: 12px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; border: 1px solid #ffdada; display: flex; align-items: center; gap: 8px; }
+.form-group { margin-bottom: 18px; }
+.form-group label { font-size: 13px; font-weight: 600; color: #444; display: block; margin-bottom: 8px; }
+.form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; box-sizing: border-box; }
+.form-input:focus { border-color: #d70018; }
+.forgot-link { display: block; text-align: right; font-size: 12px; color: #2f80ed; text-decoration: none; margin-top: 5px; }
+.btn-login { width: 100%; padding: 14px; background: #d70018; color: #fff; border: none; border-radius: 8px; font-weight: 700; margin-top: 25px; cursor: pointer; }
+
+/* --- PHẦN THÊM MỚI ĐỂ BÁO LỖI (ADD THIS) --- */
+/* Khi ô input bị lỗi (có class error ở cha) */
+.form-group.error .form-input {
+    border-color: #d70018;
+    background-color: #fff9f9;
+}
+
+/* Dòng chữ báo lỗi nhỏ bên dưới */
+.text-danger {
+    color: #d70018;
+    font-size: 12px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
