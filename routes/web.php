@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 // --- 1. IMPORT CONTROLLERS CLIENT ---
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\ProductDetailController;
-use App\Http\Controllers\Client\CategoryController as ClientCategoryController; 
+use App\Http\Controllers\CategoryController as ClientCategoryController; 
 
 // --- 2. IMPORT CONTROLLERS CHUNG ---
 use App\Http\Controllers\AuthController;
